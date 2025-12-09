@@ -28,10 +28,11 @@ private:
     using NativeHandle = socket_native_t;
     static const NativeHandle InvalidHandle = SOCKET_INVALID_HANDLE;
 
-public:
+private:
 #if defined(_WIN32)
     static WSADATA wsaData;
 #endif
+public:
     static Error Setup(void);
     static Error Cleanup(void);
 
