@@ -20,7 +20,7 @@ const socket_native_t SOCKET_INVALID_HANDLE = -1;
 #endif
 
 #include "NetworkAddress.hpp"
-#include "Error.hpp"
+#include "SocketError.hpp"
 
 class Socket
 {
@@ -33,8 +33,8 @@ private:
     static WSADATA wsaData;
 #endif
 public:
-    static Error Setup(void);
-    static Error Cleanup(void);
+    static SocketError Setup(void);
+    static SocketError Cleanup(void);
 
 public:
     Socket(const NetworkAddress&);
@@ -42,11 +42,11 @@ public:
 
 public:
     bool IsValid(void) const;
-    Error GetError(void) const;
+    SocketError GetError(void) const;
     NativeHandle GetNative(void) const;
 
 private:
-    Error error_;
+    SocketError error_;
     NativeHandle handle_;
 };
 

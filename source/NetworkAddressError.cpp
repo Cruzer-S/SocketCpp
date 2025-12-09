@@ -6,6 +6,10 @@
 #include <netdb.h>
 #endif
 
+NetworkAddressError::NetworkAddressError(int code) : SocketError(code)
+{
+}
+
 bool NetworkAddressError::Ok(void) const
 {
     return code_ == 0;

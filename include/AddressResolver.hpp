@@ -16,7 +16,7 @@
 class AddressResolver
 {
 private:
-    using Result = std::tuple<Error, std::vector<NetworkAddress>>;
+    using Result = std::tuple<SocketError, std::vector<NetworkAddress>>;
 
 public:
     struct Hints {

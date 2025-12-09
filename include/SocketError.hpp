@@ -5,9 +5,9 @@
 
 #define ERROR_MESSAGE_SIZE  4096
 
-class Error {
+class SocketError {
 public:
-    Error(int code);
+    SocketError(int code);
 
 public:
     int Code(void) const;

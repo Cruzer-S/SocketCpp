@@ -2,7 +2,7 @@
 
 #include <cstring>
 
-using Result = std::tuple<Error, std::vector<NetworkAddress>>;
+using Result = std::tuple<SocketError, std::vector<NetworkAddress>>;
 
 Result AddressResolver::ResolveImpl(const char* host, const char* service, const Hints& hints)
 {
@@ -19,14 +19,14 @@ Result AddressResolver::ResolveImpl(const char* host, const char* service, const
     int rc = getaddrinfo(host, service, &ai, &ai_ret);
     std::vector<NetworkAddress> out;
     if (rc != 0)
-        return { NetworkAddressError::Error(rc), std::move(out) };
+        return { NetworkAddressError::NetworkAddressError(rc), std::move(out) };
 
     for (struct addrinfo* ai = ai_ret; ai; ai = ai->ai_next)
         out.push_back(NetworkAddress(*ai));
 
     freeaddrinfo(ai_ret);
 
-    return { NetworkAddressError::Error(0), std::move(out) };
+    return { NetworkAddressError::NetworkAddressError(0), std::move(out) };
 }
 
 Result AddressResolver::Resolve(const char* host, const char* service, const Hints& hints)

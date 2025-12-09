@@ -1,25 +1,25 @@
-#include "Error.hpp"
+#include "SocketError.hpp"
 
 #include <Windows.h>
 
-thread_local char Error::error_message_[ERROR_MESSAGE_SIZE];
+thread_local char SocketError::error_message_[ERROR_MESSAGE_SIZE];
 
-Error::Error(int code)
+SocketError::SocketError(int code)
 {
     code_ = code;
 }
 
-int Error::Code(void) const
+int SocketError::Code(void) const
 {
     return code_;
 }
 
-bool Error::Ok(void) const
+bool SocketError::Ok(void) const
 {
     return code_ == 0;
 }
 
-std::string Error::Reason(void) const
+std::string SocketError::Reason(void) const
 {
 #if defined(_WIN32)
     FormatMessageA(
